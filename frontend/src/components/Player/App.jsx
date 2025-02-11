@@ -12,15 +12,17 @@ class App extends React.Component {
       players: [],
       currentPlayer: {}
     }
+    this.updateCurrentPlayer = this.updateCurrentPlayer.bind(this)
   }
   componentDidMount() {
-    const url='http://localhost:4000/api/players/'
+    const url = 'http://localhost:4000/api/players/'
     axios.get(url)
-    .then((Response) => {
-      this.setState({
-        players: Response.data})
-    })
-    .catch((error) => console.log(error))
+      .then((Response) => {
+        this.setState({
+          players: Response.data
+        })
+      })
+      .catch((error) => console.log(error))
   }
 
   updateCurrentPlayer(item) {
@@ -29,19 +31,25 @@ class App extends React.Component {
     })
   }
 
-  render () {
+  render() {
     return (
-      <div classname='container-fluid'>
+      <div className='container-fluid'>
         <div className='row'>
-         <div className='col s12'>Menu</div>  
+          <nav>
+            <div className='nav-wrapper blue darken-1'>
+              <a href='#!' className='brand-logo'>Soccer Manager</a>
+            </div>
+          </nav>
         </div>
         <div className='row'>
-         <div className='col s3'><PlayerList players={this.state.players}
-         updateCurrentPlayer={this.updateCurrentPlayer}/></div>  
-         <div className='col s9'><PlayerSingle player={this.state.currentPlayer}/></div>  
+          <div className='col s3'><PlayerList players={this.state.players}
+            updateCurrentPlayer={this.updateCurrentPlayer} />
+          </div>
+          <div className='col s9'><PlayerSingle player={this.state.currentPlayer} />
+          </div>
         </div>
         <div className='row'>
-         <div className='col s12'><PlayerForm/></div>  
+          <div className='col s12'><PlayerForm /></div>
         </div>
       </div>
     )
